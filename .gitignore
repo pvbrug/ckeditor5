@@ -41,3 +41,6 @@ packages/*/dist
 src/**/*.js
 src/**/*.js.map
 src/**/*.d.ts
+
+*.tsbuildinfo
+.rollup.cache

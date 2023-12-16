@@ -59,6 +59,7 @@ export default [
 			sourcemap: sourceMap,
 			banner
 		},
+		external: id => external.some( name => id.startsWith( name ) ),
 		plugins: [
 			del( {
 				targets: path.join( cwd, 'dist' )
