@@ -8,7 +8,6 @@ import { readFile } from 'fs/promises';
 import typescript from 'typescript';
 import del from 'rollup-plugin-delete';
 import styles from 'rollup-plugin-styles';
-import terser from '@rollup/plugin-terser';
 import commonjs from '@rollup/plugin-commonjs';
 import svgPlugin from 'rollup-plugin-svg-import';
 import typescriptPlugin from '@rollup/plugin-typescript';
@@ -30,7 +29,7 @@ const cwd = path.resolve();
 const pkg = JSON.parse( await readFile( path.join( cwd, 'package.json') ) );
 
 // List of external dependencies
-const external = [
+const externals = [
 	...Object.keys( pkg.dependencies || {} ),
 	...Object.keys( pkg.peerDependencies || {} )
 ];
@@ -48,91 +47,43 @@ const banner =
 /**
  * @type {import('rollup').RollupOptions}
  */
-export default [
-	// Output in a new format for NPM usage
-	{
-		input: inputPath,
-		output: {
-			format: 'esm',
-			file: path.join( cwd, 'dist', 'index.js'),
-			assetFileNames: '[name][extname]',
-			sourcemap: sourceMap,
-			banner
-		},
-		external: id => external.some( name => id.startsWith( name ) ),
-		plugins: [
-			del( {
-				targets: path.join( cwd, 'dist' )
-			} ),
-			commonjs(),
-			nodeResolve(),
-			svgPlugin( {
-				stringify: true
-			} ),
-			styles( {
-				mode: [ 'extract', 'styles.css' ],
-				plugins: [
-					postcssNesting,
-					postcssMixins,
-					postcssImport
-				],
-				minimize: true,
-				sourceMap
-			} ),
-			typescriptPlugin( {
-				tsconfig: tsConfigPath,
-				typescript,
-				compilerOptions: {
-					declarationDir: path.join( cwd, 'dist', 'types'),
-					declaration: true,
-					declarationMap: false, // TODO
-				},
-				sourceMap
-			} )
-		]
+export default {
+	input: inputPath,
+	output: {
+		format: 'esm',
+		file: path.join( cwd, 'dist', 'index.js'),
+		assetFileNames: '[name][extname]',
+		sourcemap: sourceMap,
+		banner
 	},
-
-	// Output in a new format for CDN usage
-	{
-		input: inputPath,
-		output: {
-			format: 'esm',
-			file: path.join( cwd, 'dist', 'index.min.js' ),
-			assetFileNames: '[name][extname]',
-			sourcemap: sourceMap,
-			banner
-		},
-		external: [
-			/^@ckeditor/,
-			/^ckeditor5/
-		],
-		plugins: [
-			commonjs(),
-			nodeResolve(),
-			svgPlugin( {
-				stringify: true
-			} ),
-			styles( {
-				mode: [ 'extract', 'styles.css' ],
-				plugins: [
-					postcssNesting,
-					postcssMixins,
-					postcssImport
-				],
-				minimize: true,
-				sourceMap: false
-			} ),
-			typescriptPlugin( {
-				tsconfig: tsConfigPath,
-				typescript,
-				sourceMap: false
-			} ),
-			terser( {
-				format: {
-					// Remove all comments except third-party licenses and the license banner from above (starting with `!`).
-					comments: ( node, comment ) => /@license/.test( comment.value ) && ( /^!/.test( comment.value ) || !/CKSource/.test( comment.value ) )
-				}
-			} )
-		]
-	}
-];
+	external: id => externals.some( name => id.startsWith( name ) ),
+	plugins: [
+		del( {
+			targets: path.join( cwd, 'dist' )
+		} ),
+		commonjs(),
+		nodeResolve(),
+		svgPlugin( {
+			stringify: true
+		} ),
+		styles( {
+			mode: [ 'extract', 'styles.css' ],
+			plugins: [
+				postcssNesting,
+				postcssMixins,
+				postcssImport
+			],
+			minimize: true,
+			sourceMap
+		} ),
+		typescriptPlugin( {
+			tsconfig: tsConfigPath,
+			typescript,
+			compilerOptions: {
+				declaration: true,
+				declarationMap: false, // TODO
+			},
+			sourceMap
+		} )
+	]
+};

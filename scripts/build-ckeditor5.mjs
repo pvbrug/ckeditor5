@@ -30,7 +30,7 @@ const cwd = path.resolve();
 const pkg = JSON.parse( await readFile( path.join( cwd, 'package.json' ) ) );
 
 // List of external dependencies
-const external = [
+const externals = [
 	...Object.keys( pkg.dependencies || {} ),
 	...Object.keys( pkg.peerDependencies || {} )
 ];
@@ -59,7 +59,7 @@ export default [
 			sourcemap: sourceMap,
 			banner
 		},
-		external: id => external.some( name => id.startsWith( name ) ),
+		external: id => externals.some( name => id.startsWith( name ) ),
 		plugins: [
 			del( {
 				targets: path.join( cwd, 'dist' )
@@ -83,8 +83,9 @@ export default [
 				tsconfig: tsConfigPath,
 				typescript,
 				compilerOptions: {
-					declarationDir: path.join( cwd, 'dist', 'types' ),
+					rootDir: path.join( cwd, 'src' ),
 					declaration: true,
+					declarationDir: path.join( cwd, 'dist', 'types' ),
 					declarationMap: false, // TODO
 				},
 				sourceMap
@@ -121,7 +122,10 @@ export default [
 			typescriptPlugin( {
 				tsconfig: tsConfigPath,
 				typescript,
-				sourceMap: false
+				sourceMap: false,
+				include: [
+					'**/*.ts'
+				]
 			} ),
 			terser( {
 				format: {
