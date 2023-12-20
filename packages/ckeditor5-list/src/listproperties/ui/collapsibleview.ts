@@ -9,10 +9,7 @@
 
 import type { Locale } from 'ckeditor5/src/utils';
 
-import { View, ButtonView, type ViewCollection } from 'ckeditor5/src/ui';
-
-// eslint-disable-next-line ckeditor5-rules/ckeditor-imports
-import dropdownArrowIcon from '@ckeditor/ckeditor5-ui/theme/icons/dropdown-arrow.svg';
+import { icons, View, ButtonView, type ViewCollection } from 'ckeditor5/src/ui';
 
 import '../../../theme/collapsible.css';
 
@@ -127,7 +124,7 @@ export default class CollapsibleView extends View {
 
 		buttonView.set( {
 			withText: true,
-			icon: dropdownArrowIcon
+			icon: icons.dropdownArrowIcon
 		} );
 
 		buttonView.extendTemplate( {

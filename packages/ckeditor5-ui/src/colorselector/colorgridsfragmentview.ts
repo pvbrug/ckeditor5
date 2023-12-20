@@ -21,7 +21,7 @@ import type { FocusTracker, Locale } from '@ckeditor/ckeditor5-utils';
 import type ViewCollection from '../viewcollection';
 import type { ColorSelectorExecuteEvent, ColorSelectorColorPickerShowEvent } from './colorselectorview';
 
-import removeButtonIcon from '@ckeditor/ckeditor5-core/theme/icons/eraser.svg';
+import { icons } from '@ckeditor/ckeditor5-core';
 import colorPaletteIcon from '../../theme/icons/color-palette.svg';
 
 /**
@@ -351,7 +351,7 @@ export default class ColorGridsFragmentView extends View {
 
 		buttonView.set( {
 			withText: true,
-			icon: removeButtonIcon,
+			icon: icons.eraser,
 			label: this._removeButtonLabel
 		} );
 

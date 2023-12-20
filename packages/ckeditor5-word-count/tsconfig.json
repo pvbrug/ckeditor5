@@ -2,7 +2,6 @@
 	"extends": "../../tsconfig.kowalski.json",
 	"compilerOptions": {
 		"rootDir": "src",
-		"declarationDir": "dist/types",
 		"types": [
 			"../../typings/types"
 		]

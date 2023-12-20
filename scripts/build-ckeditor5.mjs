@@ -76,7 +76,7 @@ export default [
 					postcssMixins,
 					postcssImport
 				],
-				minimize: true,
+				minimize: false,
 				sourceMap
 			} ),
 			typescriptPlugin( {
@@ -110,7 +110,7 @@ export default [
 				stringify: true
 			} ),
 			styles( {
-				mode: [ 'extract', 'styles.css' ],
+				mode: [ 'extract', 'styles.min.css' ],
 				plugins: [
 					postcssNesting,
 					postcssMixins,

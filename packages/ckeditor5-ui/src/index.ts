@@ -104,9 +104,13 @@ export { default as BlockToolbar } from './toolbar/block/blocktoolbar';
 export { default as ViewCollection } from './viewcollection';
 
 import { default as colorPaletteIcon } from '../theme/icons/color-palette.svg';
+import { default as dropdownArrowIcon } from '../theme/icons/dropdown-arrow.svg';
+import { default as previousArrow } from '../theme/icons/previous-arrow.svg';
 
 export const icons = {
-	colorPaletteIcon
+	colorPaletteIcon,
+	dropdownArrowIcon,
+	previousArrow
 };
 
 import './augmentation';

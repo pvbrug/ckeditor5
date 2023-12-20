@@ -73,7 +73,7 @@ export default {
 				postcssMixins,
 				postcssImport
 			],
-			minimize: true,
+			minimize: false,
 			sourceMap
 		} ),
 		typescriptPlugin( {
@@ -81,6 +81,7 @@ export default {
 			typescript,
 			compilerOptions: {
 				declaration: true,
+				declarationDir: path.join( cwd, 'dist', 'types' ),
 				declarationMap: false, // TODO
 			},
 			sourceMap
