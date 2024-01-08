@@ -7,17 +7,17 @@
  * @module engine/view/position
  */
 
-import TypeCheckable from './typecheckable';
+import TypeCheckable from './typecheckable.js';
 
 import { CKEditorError, compareArrays } from '@ckeditor/ckeditor5-utils';
 
-import EditableElement from './editableelement';
+import EditableElement from './editableelement.js';
 
-import type DocumentFragment from './documentfragment';
-import type Element from './element';
-import type Item from './item';
-import type Node from './node';
-import { default as TreeWalker, type TreeWalkerValue, type TreeWalkerOptions } from './treewalker';
+import type DocumentFragment from './documentfragment.js';
+import type Element from './element.js';
+import type Item from './item.js';
+import type Node from './node.js';
+import { default as TreeWalker, type TreeWalkerValue, type TreeWalkerOptions } from './treewalker.js';
 
 /**
  * Position in the view tree. Position is represented by its parent node and an offset in this parent.

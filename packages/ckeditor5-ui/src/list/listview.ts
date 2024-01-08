@@ -7,13 +7,14 @@
  * @module ui/list/listview
  */
 
-import View from '../view';
-import FocusCycler from '../focuscycler';
+import View from '../view.js';
+import FocusCycler from '../focuscycler.js';
 
-import type ListItemView from './listitemview';
-import ListItemGroupView from './listitemgroupview';
-import type DropdownPanelFocusable from '../dropdown/dropdownpanelfocusable';
-import ViewCollection from '../viewcollection';
+import ListItemView from './listitemview.js';
+import ListItemGroupView from './listitemgroupview.js';
+import type ListSeparatorView from './listseparatorview.js';
+import type DropdownPanelFocusable from '../dropdown/dropdownpanelfocusable.js';
+import ViewCollection from '../viewcollection.js';
 
 import {
 	FocusTracker,
@@ -39,7 +40,7 @@ export default class ListView extends View<HTMLUListElement> implements Dropdown
 	/**
 	 * Collection of the child list views.
 	 */
-	public readonly items: ViewCollection<ListItemView | ListItemGroupView>;
+	public readonly items: ViewCollection<ListItemView | ListItemGroupView | ListSeparatorView>;
 
 	/**
 	 * Tracks information about DOM focus in the list.
@@ -141,7 +142,7 @@ export default class ListView extends View<HTMLUListElement> implements Dropdown
 		for ( const item of this.items ) {
 			if ( item instanceof ListItemGroupView ) {
 				this._registerFocusableItemsGroup( item );
-			} else {
+			} else if ( item instanceof ListItemView ) {
 				this._registerFocusableListItem( item );
 			}
 		}

@@ -9,14 +9,14 @@
 
 /* globals DOMParser */
 
-import BasicHtmlWriter from './basichtmlwriter';
-import DomConverter from '../view/domconverter';
+import BasicHtmlWriter from './basichtmlwriter.js';
+import DomConverter from '../view/domconverter.js';
 
-import type DataProcessor from './dataprocessor';
-import type HtmlWriter from './htmlwriter';
-import type ViewDocument from '../view/document';
-import type ViewDocumentFragment from '../view/documentfragment';
-import type { MatcherPattern } from '../view/matcher';
+import type DataProcessor from './dataprocessor.js';
+import type HtmlWriter from './htmlwriter.js';
+import type ViewDocument from '../view/document.js';
+import type ViewDocumentFragment from '../view/documentfragment.js';
+import type { MatcherPattern } from '../view/matcher.js';
 
 /**
  * The XML data processor class.
@@ -67,7 +67,7 @@ export default class XmlDataProcessor implements DataProcessor {
 
 	/**
 	 * Converts the provided {@link module:engine/view/documentfragment~DocumentFragment document fragment}
-	 * to data format &mdash; in this case an XML string.
+	 * to data format &ndash; in this case an XML string.
 	 *
 	 * @returns An XML string.
 	 */

@@ -7,7 +7,7 @@
  * @module engine/view/node
  */
 
-import TypeCheckable from './typecheckable';
+import TypeCheckable from './typecheckable.js';
 
 import {
 	CKEditorError,
@@ -17,9 +17,9 @@ import {
 
 import { clone } from 'lodash-es';
 
-import type { default as Document, ChangeType } from './document';
-import type DocumentFragment from './documentfragment';
-import type Element from './element';
+import type { default as Document, ChangeType } from './document.js';
+import type DocumentFragment from './documentfragment.js';
+import type Element from './element.js';
 
 /**
  * Abstract view node class.

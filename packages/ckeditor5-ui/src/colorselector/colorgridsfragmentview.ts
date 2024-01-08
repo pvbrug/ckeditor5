@@ -7,22 +7,20 @@
  * @module ui/colorselector/colorgridsfragmentview
  */
 
-import View from '../view';
-import ButtonView from '../button/buttonview';
-import ColorGridView, { type ColorDefinition } from '../colorgrid/colorgridview';
-import ColorTileView from '../colorgrid/colortileview';
-import LabelView from '../label/labelview';
-import Template from '../template';
+import View from '../view.js';
+import ButtonView from '../button/buttonview.js';
+import ColorGridView, { type ColorDefinition } from '../colorgrid/colorgridview.js';
+import ColorTileView from '../colorgrid/colortileview.js';
+import LabelView from '../label/labelview.js';
+import Template from '../template.js';
 
-import DocumentColorCollection from './documentcolorcollection';
+import DocumentColorCollection from './documentcolorcollection.js';
 
 import type { Model } from '@ckeditor/ckeditor5-engine';
 import type { FocusTracker, Locale } from '@ckeditor/ckeditor5-utils';
-import type ViewCollection from '../viewcollection';
-import type { ColorSelectorExecuteEvent, ColorSelectorColorPickerShowEvent } from './colorselectorview';
-
+import type ViewCollection from '../viewcollection.js';
+import type { ColorSelectorExecuteEvent, ColorSelectorColorPickerShowEvent } from './colorselectorview.js';
 import { icons } from '@ckeditor/ckeditor5-core';
-import colorPaletteIcon from '../../theme/icons/color-palette.svg';
 
 /**
  * One of the fragments of {@link module:ui/colorselector/colorselectorview~ColorSelectorView}.
@@ -334,7 +332,7 @@ export default class ColorGridsFragmentView extends View {
 		this.colorPickerButtonView.set( {
 			label: this._colorPickerLabel,
 			withText: true,
-			icon: colorPaletteIcon,
+			icon: icons.colorPalette,
 			class: 'ck-color-selector__color-picker'
 		} );
 

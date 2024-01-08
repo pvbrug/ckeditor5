@@ -8,12 +8,12 @@
  */
 
 /* globals console */
-
-import toArray from './toarray';
-import { _translate, type Message } from './translation-service';
-import { getLanguageDirection, type LanguageDirection } from './language';
 import type { Translations } from '@ckeditor/ckeditor5-core';
 import { merge } from 'lodash-es';
+
+import toArray from './toarray.js';
+import { _translate, type Message } from './translation-service.js';
+import { getLanguageDirection, type LanguageDirection } from './language.js';
 
 /**
  * Represents the localization services.

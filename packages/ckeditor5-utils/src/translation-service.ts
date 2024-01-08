@@ -10,8 +10,8 @@
  */
 
 import type { Translations, Editor } from '@ckeditor/ckeditor5-core';
-import CKEditorError from './ckeditorerror';
-import global from './dom/global';
+import CKEditorError from './ckeditorerror.js';
+import global from './dom/global.js';
 import { merge } from 'lodash-es';
 
 declare global {
