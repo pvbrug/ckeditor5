@@ -1,5 +1,5 @@
 /**
- * @license Copyright (c) 2003-2023, CKSource Holding sp. z o.o. All rights reserved.
+ * @license Copyright (c) 2003-2024, CKSource Holding sp. z o.o. All rights reserved.
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
@@ -54,24 +54,10 @@ export * from '@ckeditor/ckeditor5-special-characters';
 export * from '@ckeditor/ckeditor5-style';
 export * from '@ckeditor/ckeditor5-table';
 export * from '@ckeditor/ckeditor5-typing';
-// @ts-ignore
 export * from '@ckeditor/ckeditor5-ui';
 export * from '@ckeditor/ckeditor5-undo';
-// @ts-ignore
 export * from '@ckeditor/ckeditor5-upload';
-// @ts-ignore
 export * from '@ckeditor/ckeditor5-utils';
 export * from '@ckeditor/ckeditor5-watchdog';
-// @ts-ignore
 export * from '@ckeditor/ckeditor5-widget';
 export * from '@ckeditor/ckeditor5-word-count';
-
-/**
- * TODO conflicts:
- * icons											// core, ui																// Add `colorPaletteIcon` icon to core icons?
- * Model											// engine, ui															//
- * View 											// engine, ui															//
- * Position										// engine, utils (interface)							//
- * findOptimalInsertionRange	// engine, widget													//
- * UploadAdapter							// upload (interface), adapter-ckfinder		// Rename in `adapter-ckfinder` to `UploadAdapterCKFinder` or `CKFinderAdapter`?
- */
