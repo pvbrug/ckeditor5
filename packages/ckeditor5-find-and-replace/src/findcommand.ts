@@ -74,7 +74,7 @@ export default class FindCommand extends Command {
 
 		// Set the search text to the last search text if it was not provided.
 		findCallback = tapFunctionResult( findCallback, findCallbackResult => {
-			if ( !Array.isArray( findCallbackResult ) ) {
+			if ( findCallbackResult && !Array.isArray( findCallbackResult ) ) {
 				callbackSearchText = findCallbackResult.searchText;
 			}
 		} );
