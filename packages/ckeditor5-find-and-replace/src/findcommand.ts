@@ -60,15 +60,24 @@ export default class FindCommand extends Command {
 		const findAndReplaceUtils: FindAndReplaceUtils = editor.plugins.get( 'FindAndReplaceUtils' );
 
 		let findCallback: FindCallback | undefined;
+		let callbackSearchText: string = '';
 
 		// Allow to execute `find()` on a plugin with a keyword only.
 		if ( typeof callbackOrText === 'string' ) {
-			findCallback = findAndReplaceUtils.findByTextCallback( callbackOrText, { matchCase, wholeWords } );
-
-			this._state.searchText = callbackOrText;
+			findCallback = ( ...args ) => ( {
+				results: findAndReplaceUtils.findByTextCallback( callbackOrText, { matchCase, wholeWords } )( ...args ),
+				searchText: callbackOrText
+			} );
 		} else {
 			findCallback = callbackOrText;
 		}
+
+		// Set the search text to the last search text if it was not provided.
+		findCallback = tapFunctionResult( findCallback, findCallbackResult => {
+			if ( !Array.isArray( findCallbackResult ) ) {
+				callbackSearchText = findCallbackResult.searchText;
+			}
+		} );
 
 		// Initial search is done on all nodes in all roots inside the content.
 		const results = model.document.getRootNames()
@@ -82,10 +91,7 @@ export default class FindCommand extends Command {
 		this._state.clear( model );
 		this._state.results.addMany( results );
 		this._state.highlightedResult = results.get( 0 );
-
-		if ( typeof callbackOrText === 'string' ) {
-			this._state.searchText = callbackOrText;
-		}
+		this._state.searchText = callbackSearchText;
 
 		if ( findCallback ) {
 			this._state.lastSearchCallback = findCallback;
@@ -105,3 +111,23 @@ export default class FindCommand extends Command {
  * The options object for the find command.
  */
 export type FindAttributes = { matchCase?: boolean; wholeWords?: boolean };
+
+/**
+ * Wraps a function and executes a tap function with the result of the wrapped function.
+ *
+ * @param wrappedFn The function to be wrapped.
+ * @param tapFn The function to be executed with the result of the wrapped function.
+ * @returns A function that executes the wrapped function, taps the result, and returns the result.
+ */
+function tapFunctionResult<R, A extends Array<any>>(
+	wrappedFn: ( ...args: A ) => R,
+	tapFn: ( result: R ) => void
+) {
+	return ( ...args: A ) => {
+		const resultValue = wrappedFn( ...args );
+
+		tapFn( resultValue );
+
+		return resultValue;
+	};
+}

@@ -166,4 +166,22 @@ export default class FindAndReplaceState extends /* #__PURE__ */ ObservableMixin
 /**
  * The callback function used to find matches in the document.
  */
-export type FindCallback = ( ( { item, text }: { item: Item; text: string } ) => Array<ResultType> );
+export type FindCallback = ( { item, text }: { item: Item; text: string } ) => FindCallbackResult;
+
+/**
+ * Represents the result of a find callback.
+ */
+export type FindCallbackResult =
+	// Deprecated: Try to avoid returning array of results. Return the `searchText` attribute in the result object instead.
+	| Array<ResultType>
+
+	// The `searchText` attribute is used to determine if the search query has changed.
+	// If returned `searchText` is different than the last search query, the search results
+	// will be invalidated after clicking `find next` button and the search will be re-run.
+	//
+	// It's highly recommended to return the `searchText` attribute in the result object instead of
+	// returning array to ensure the search results are properly invalidated when the search query changes.
+	| {
+		results: Array<ResultType>;
+		searchText: string;
+	};
