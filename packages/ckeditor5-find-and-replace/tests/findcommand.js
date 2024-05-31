@@ -399,10 +399,7 @@ describe( 'FindCommand', () => {
 				setData( model, '<paragraph>[]Foo bar baz. Bam bar bom.</paragraph>' );
 
 				const searchText = 'bar';
-				const { results } = command.execute(
-					( ...args ) =>
-						findAndReplaceUtils.findByTextCallback( searchText, {} )( ...args )
-				);
+				const { results } = command.execute( findAndReplaceUtils.findByTextCallback( searchText, {} ) );
 
 				expect( results.length ).to.equal( 2 );
 				expect( command._state.searchText ).to.equal( '' );
